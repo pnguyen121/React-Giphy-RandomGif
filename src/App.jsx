@@ -28,7 +28,6 @@ function App() {
 
           const data = await responseJson.json()
           console.log(data, 'OBJECT ---------------------')
-          console.log(data[0], 'OBJECT ---------------------')
 
           setGif(data.data[0].images.original.url)
         } catch(err){

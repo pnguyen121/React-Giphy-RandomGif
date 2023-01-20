@@ -13,6 +13,7 @@ export default function Form(props) {
   function handleSubmit(e) {
     e.preventDefault();
     props.liftFormInput(formInput);
+    setFormInput('')
   }
 
   return (
