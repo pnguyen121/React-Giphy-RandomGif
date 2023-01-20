@@ -8,7 +8,7 @@ import Form from './Form/Form'
 function App() {
   const [gif, setGif] = useState('')
   const [randomGif, setRandomGif] = useState('')
-  const [formInput, setFormInput] = useState('dwayne johnson')
+  const [formInput, setFormInput] = useState('corgi')
   // const [count, setCount] = useState(0)
 
 
