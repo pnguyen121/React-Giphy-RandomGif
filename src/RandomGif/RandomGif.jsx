@@ -19,8 +19,8 @@ export default function RandomGif(props){
 
     return(
         <>
-        <div>Please Refresh To Change Gif Piffy</div>
-        <img src={props.gifData.url}></img>
+        <h4>Search a Giphy Piffy Above ^ </h4>
+        <img src={props.gifData}></img>
 
         </>
     )

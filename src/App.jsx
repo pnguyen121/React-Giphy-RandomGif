@@ -6,22 +6,31 @@ import Form from './Form/Form'
 
 function App() {
   const [gif, setGif] = useState('')
+  const [formInput, setFormInput] = useState('')
   // const [count, setCount] = useState(0)
+
+
+
+  // LIFT FORM INPUT FROM FORM
+  function liftFormInput(formInput){
+    setFormInput(formInput)
+  }
 
     useEffect(() => {
       console.log("use Effect Working")
+      const searchGiphy = `https://api.giphy.com/v1/gifs/search?api_key=1UfkR8w9lpxXouKWO5o2qE9Q17bKVJJU&q=${formInput}&limit=25&offset=0&rating=g&lang=en`
       const gifFromGiphy = `https://api.giphy.com/v1/gifs/random?api_key=1UfkR8w9lpxXouKWO5o2qE9Q17bKVJJU&tag=&rating=r`
 
       async function makeApiCall(){
         try{
-          const responseJson = await fetch(gifFromGiphy);
+          const responseJson = await fetch(searchGiphy);
           console.log(responseJson)
 
           const data = await responseJson.json()
-          console.log(data)
-          console.log(data.data, 'DATA.DATA')
+          console.log(data, 'OBJECT ---------------------')
+          console.log(data[0], 'OBJECT ---------------------')
 
-          setGif(data.data.images.original)
+          setGif(data.data[0].images.original.url)
         } catch(err){
           console.log(err)
 
@@ -29,13 +38,15 @@ function App() {
       }
 
       makeApiCall()
-    },[])
+    },[formInput])
+
+
 
 
   return (
     <div className='App'>
       <h2> GIPHY PIFFY </h2>
-      <Form />
+      <Form liftFormInput={liftFormInput}/>
       <RandomGif gifData={gif}/>
     </div>
   //   <div className="App">
