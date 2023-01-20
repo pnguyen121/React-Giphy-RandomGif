@@ -2,11 +2,13 @@ import { useState, useEffect  } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 import RandomGif from './RandomGif/RandomGif'
+import RandomGiffy from './RandomGiffy/RandomGiffy'
 import Form from './Form/Form'
 
 function App() {
   const [gif, setGif] = useState('')
-  const [formInput, setFormInput] = useState('')
+  const [randomGif, setRandomGif] = useState('')
+  const [formInput, setFormInput] = useState('dwayne johnson')
   // const [count, setCount] = useState(0)
 
 
@@ -17,9 +19,28 @@ function App() {
   }
 
     useEffect(() => {
+
+      const random = Math.floor(Math.random() * 15) + 1;
+
       console.log("use Effect Working")
       const searchGiphy = `https://api.giphy.com/v1/gifs/search?api_key=1UfkR8w9lpxXouKWO5o2qE9Q17bKVJJU&q=${formInput}&limit=25&offset=0&rating=g&lang=en`
       const gifFromGiphy = `https://api.giphy.com/v1/gifs/random?api_key=1UfkR8w9lpxXouKWO5o2qE9Q17bKVJJU&tag=&rating=r`
+
+      async function makeRandomApiCall(){
+        try{
+          const responseJson = await fetch(gifFromGiphy);
+          console.log(responseJson)
+
+          const data1 = await responseJson.json()
+          console.log(data1, 'OBJECT ---------DATA1-----------')
+
+          setRandomGif(data1.data.images.original.url)
+        } catch(err){
+          console.log(err)
+
+        }
+      }
+      makeRandomApiCall()
 
       async function makeApiCall(){
         try{
@@ -29,7 +50,7 @@ function App() {
           const data = await responseJson.json()
           console.log(data, 'OBJECT ---------------------')
 
-          setGif(data.data[0].images.original.url)
+          setGif(data.data[random].images.original.url)
         } catch(err){
           console.log(err)
 
@@ -47,6 +68,7 @@ function App() {
       <h2> GIPHY PIFFY </h2>
       <Form liftFormInput={liftFormInput}/>
       <RandomGif gifData={gif}/>
+      <RandomGiffy randomGif={randomGif} />
     </div>
   //   <div className="App">
   //     <div>

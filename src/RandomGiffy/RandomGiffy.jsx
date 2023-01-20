@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function RandomGif(props){
+export default function RandomGiffy(props){
 
     // const[formInput, setFormInput] = useState({
 
@@ -19,10 +19,7 @@ export default function RandomGif(props){
 
     return(
         <>
-        <h4>Search a Giphy Piffy Above ^ </h4>
-        {/* <img src={props.RandomGif}></img> */}
-        <img src={props.gifData}></img>
-
+        <img src={props.RandomGif}></img>
         </>
     )
 
